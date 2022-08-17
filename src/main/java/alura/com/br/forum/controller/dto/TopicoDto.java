@@ -1,6 +1,7 @@
 package alura.com.br.forum.controller.dto;
 
 import alura.com.br.forum.modelo.Topico;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,10 +21,6 @@ public class TopicoDto {
         this.dataCriacao = topico.getDataCriacao();
     }
 
-    public static List<TopicoDto> conveter(List<Topico> topicos) {
-        return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
-    }
-
     public Long getId() {
         return id;
     }
@@ -38,5 +35,9 @@ public class TopicoDto {
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
+    }
+
+    public static Page<TopicoDto> conveter(Page<Topico> topicos) {
+        return topicos.map(TopicoDto::new);
     }
 }
